@@ -1,0 +1,187 @@
+{
+  "specification_version": "3.4.1",
+  "source_document_revision": "AHj4eMT9yK21YUzFwGGh-vnHaxeOM8sbBtiC8OSfCm71Y1VYtWxOuiy2SG3GJI-8WRSfEwjhtEaCMBLoCWf40ZnyE823r9u8RkNjxBh2Qg",
+  "table": "Table 2: Approved matching combinations and conservative collision estimates (Category 1)",
+  "columns": [
+    "ID",
+    "Approved field combination",
+    "P(collision), exact",
+    "P(collision), fuzzy"
+  ],
+  "rows": [
+    {
+      "ID": "01",
+      "Approved field combination": "First Name* + Last Name* + DOB* + Street Line*",
+      "P(collision), exact": "3e-13",
+      "P(collision), fuzzy": "9e-13"
+    },
+    {
+      "ID": "02",
+      "Approved field combination": "First Name + Last Name* + DOB* + Phone Number",
+      "P(collision), exact": "1e-14",
+      "P(collision), fuzzy": "2e-14"
+    },
+    {
+      "ID": "03",
+      "Approved field combination": "First Name* + Last Name* + DOB* + Email Address",
+      "P(collision), exact": "1e-14",
+      "P(collision), fuzzy": "3e-14"
+    },
+    {
+      "ID": "04",
+      "Approved field combination": "First Name* + Last Name + DOB + SSN Last 4",
+      "P(collision), exact": "1e-12",
+      "P(collision), fuzzy": "2e-12"
+    },
+    {
+      "ID": "05",
+      "Approved field combination": "First Name + Last Name* + DOB + SSN Last 4",
+      "P(collision), exact": "1e-12",
+      "P(collision), fuzzy": "2e-12"
+    },
+    {
+      "ID": "06",
+      "Approved field combination": "First Name* + Last Name + DOB + ITIN Last 4",
+      "P(collision), exact": "1e-12",
+      "P(collision), fuzzy": "2e-12"
+    },
+    {
+      "ID": "07",
+      "Approved field combination": "First Name + Last Name* + DOB + ITIN Last 4",
+      "P(collision), exact": "1e-12",
+      "P(collision), fuzzy": "2e-12"
+    },
+    {
+      "ID": "08",
+      "Approved field combination": "First Name + DOB + MBI",
+      "P(collision), exact": "2e-12",
+      "P(collision), fuzzy": ""
+    },
+    {
+      "ID": "09",
+      "Approved field combination": "First Name + DOB + Legal ID",
+      "P(collision), exact": "2e-12",
+      "P(collision), fuzzy": ""
+    },
+    {
+      "ID": "10",
+      "Approved field combination": "Last Name* + DOB* + Legal ID",
+      "P(collision), exact": "5e-13",
+      "P(collision), fuzzy": "1e-12"
+    },
+    {
+      "ID": "11",
+      "Approved field combination": "First Name + DOB + Phone Number",
+      "P(collision), exact": "2e-12",
+      "P(collision), fuzzy": ""
+    },
+    {
+      "ID": "12",
+      "Approved field combination": "First Name + DOB + Email Address",
+      "P(collision), exact": "2e-12",
+      "P(collision), fuzzy": ""
+    },
+    {
+      "ID": "13",
+      "Approved field combination": "First Name + Phone Number + SSN Last 4",
+      "P(collision), exact": "2e-12",
+      "P(collision), fuzzy": ""
+    },
+    {
+      "ID": "14",
+      "Approved field combination": "First Name + Phone Number + ITIN Last 4",
+      "P(collision), exact": "2e-12",
+      "P(collision), fuzzy": ""
+    },
+    {
+      "ID": "15",
+      "Approved field combination": "First Name + Email Address + SSN Last 4",
+      "P(collision), exact": "2e-12",
+      "P(collision), fuzzy": ""
+    },
+    {
+      "ID": "16",
+      "Approved field combination": "First Name + Email Address + ITIN Last 4",
+      "P(collision), exact": "2e-12",
+      "P(collision), fuzzy": ""
+    },
+    {
+      "ID": "17",
+      "Approved field combination": "Phone Number + MBI",
+      "P(collision), exact": "1e-12",
+      "P(collision), fuzzy": ""
+    },
+    {
+      "ID": "18",
+      "Approved field combination": "Phone Number + Legal ID (w/issuing-authority namespace)",
+      "P(collision), exact": "1e-12",
+      "P(collision), fuzzy": ""
+    },
+    {
+      "ID": "19",
+      "Approved field combination": "Email Address + MBI",
+      "P(collision), exact": "1e-12",
+      "P(collision), fuzzy": ""
+    },
+    {
+      "ID": "20",
+      "Approved field combination": "Email Address + Legal ID (w/issuing-authority namespace)",
+      "P(collision), exact": "1e-12",
+      "P(collision), fuzzy": ""
+    },
+    {
+      "ID": "21",
+      "Approved field combination": "Legal ID + MBI",
+      "P(collision), exact": "1e-12",
+      "P(collision), fuzzy": ""
+    },
+    {
+      "ID": "22",
+      "Approved field combination": "Namespace bound unique identifiers (e.g. EMPI, FHIR Patient Identifier, CSP UUID, etc)",
+      "P(collision), exact": "≈0",
+      "P(collision), fuzzy": ""
+    },
+    {
+      "ID": "23",
+      "Approved field combination": "First Name + DOB + Member ID (w/ Payer namespace)",
+      "P(collision), exact": "2e-12",
+      "P(collision), fuzzy": ""
+    },
+    {
+      "ID": "24",
+      "Approved field combination": "Last Name* + DOB* + Member ID (w/ Payer namespace)",
+      "P(collision), exact": "5e-13",
+      "P(collision), fuzzy": "1e-12"
+    },
+    {
+      "ID": "25",
+      "Approved field combination": "Phone Number + Member ID (w/ Payer namespace)",
+      "P(collision), exact": "1e-12",
+      "P(collision), fuzzy": ""
+    },
+    {
+      "ID": "26",
+      "Approved field combination": "Email Address + Member ID (w/ Payer namespace)",
+      "P(collision), exact": "1e-12",
+      "P(collision), fuzzy": ""
+    },
+    {
+      "ID": "27",
+      "Approved field combination": "First Name* + Last Name + DOB + Subscriber ID (w/ Payer namespace)",
+      "P(collision), exact": "1e-12",
+      "P(collision), fuzzy": "2e-12"
+    },
+    {
+      "ID": "28",
+      "Approved field combination": "First Name + Last Name* + DOB + Subscriber ID (w/ Payer namespace)",
+      "P(collision), exact": "1e-12",
+      "P(collision), fuzzy": "2e-12"
+    },
+    {
+      "ID": "30",
+      "Approved field combination": "Last Name* + DOB + Phone Number",
+      "P(collision), exact": "5e-13",
+      "P(collision), fuzzy": "1e-12"
+    }
+  ]
+}
