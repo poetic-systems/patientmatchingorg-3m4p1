@@ -1,6 +1,6 @@
-// Package patientmatchingorg provides the patientmatching.org specification
+// Package patientmatchingorg3m4p1 provides the patientmatching.org specification
 // v3.4.1 matching rules as a go-opm-core RuleSet.
-package patientmatchingorg
+package patientmatchingorg3m4p1
 
 import (
 	"fmt"

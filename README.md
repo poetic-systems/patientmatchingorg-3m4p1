@@ -12,7 +12,7 @@ specification's.
 ## Usage
 
 ```go
-rs, err := patientmatchingorg.New() // *rules.RuleSet
+rs, err := patientmatchingorg3m4p1.New() // *rules.RuleSet
 ```
 
 `New` returns the 29 Category 1 (Direct Match) rules of Table 2, specification
