@@ -1,5 +1,5 @@
-github.com/PortobelloAuth/go-opm-core v0.0.0-20261031154214-3c64232d8be9 h1:yXFU2AJcCMTUBhsQ/YUNCwY+J9NJMYql5cIC5C3mzrA=
-github.com/PortobelloAuth/go-opm-core v0.0.0-20261031154214-3c64232d8be9/go.mod h1:hsxCAD4SnDzYGOzH7VTnl9N/l/aczfv0lzOarjZ+QEk=
+github.com/PortobelloAuth/go-opm-core v0.0.0-20261103052120-9c4db38cdb0c h1:kfWWHd9rpQPA+4UlHuSEIg+rclaR5kPzWsUFMqUxhJ0=
+github.com/PortobelloAuth/go-opm-core v0.0.0-20261103052120-9c4db38cdb0c/go.mod h1:hsxCAD4SnDzYGOzH7VTnl9N/l/aczfv0lzOarjZ+QEk=
 github.com/PortobelloAuth/go-projectusat v0.1.0-alpha.4 h1:wSYWDXSON1ouKW9O4wLziNZKUQu++M7+oaU0FkL66eY=
 github.com/PortobelloAuth/go-projectusat v0.1.0-alpha.4/go.mod h1:mC/EtS+g1aAY+QE6zV8xK11chh+Kwr6RRNPW7jvuV1s=
 github.com/anyascii/go v0.3.3 h1:A3BhW92hXPYPb8Y1+zLOip8xjSxNcdl1FaxzTmFxrhs=

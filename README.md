@@ -50,8 +50,8 @@ stay distinct.
 
 ## Normalization
 
-Each demographic gets go-opm-core normalizations, then its go-opm-core
-placeholder list (§V.D), so a placeholder value is reduced to the empty string.
+Each demographic gets go-opm-core normalizations, then this module's own
+placeholder list (§V.D, `placeholders.go`; supplied through `placeholder.New`), so a placeholder value is reduced to the empty string.
 Names are checked for placeholders before normalization as well, because the
 name placeholders contain whitespace and punctuation.
 

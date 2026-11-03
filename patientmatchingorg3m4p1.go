@@ -33,7 +33,7 @@ const (
 )
 
 // normalizations lists, in order, how each demographic is normalized. A
-// "placeholder-" name is a go-opm-core placeholder list; the rest are
+// "placeholder-" name is one of this module's placeholder lists; the rest are
 // registered go-opm-core normalizations. Placeholders are removed after the
 // other normalizations. Names are also checked before them, because the name
 // placeholders ("Test Patient", "Baby Boy", "N/A") contain the whitespace and
@@ -147,8 +147,8 @@ func newSequence(names []string) (*normalization.NormalizationSequence, error) {
 	for _, n := range names {
 		var norm normalization.Normalization
 		var err error
-		if strings.HasPrefix(n, "placeholder-") {
-			norm, err = placeholder.New(n)
+		if list, ok := placeholderLists[n]; ok {
+			norm = placeholder.New(n, list)
 		} else {
 			norm, err = normalization.New(n)
 		}
