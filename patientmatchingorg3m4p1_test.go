@@ -177,12 +177,36 @@ func TestUnavailable(t *testing.T) {
 	}
 	for _, tc := range []struct{ key, in string }{
 		{BirthDate, "01/01/1900"},
+		{BirthDate, "1900-01-01"},
+		{BirthDate, "11/11/1111"},
 		{BirthDate, "not a date"},
 		{Phone, "555-555-5555"},
 		{Phone, "12"},
 	} {
 		if got, err := seqs[tc.key].Apply(tc.in); err == nil {
 			t.Errorf("%s %q: got %q, want an error", tc.key, tc.in, got)
+		}
+	}
+}
+
+// TestDOBPlaceholder checks that a placeholder date is removed after
+// dateofbirth normalizes it to ISO 8601: it has no value, and no error.
+func TestDOBPlaceholder(t *testing.T) {
+	rs, err := New()
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, r := range rs.Rules {
+		for _, c := range r.Components {
+			if c.Key != BirthDate {
+				continue
+			}
+			for _, in := range []string{"01/01/2000", "20000101", "2000-01-01"} {
+				if got, err := c.Normalizations.Apply(in); err != nil || got != "" {
+					t.Errorf("%q: got %q, %v; want removed placeholder", in, got, err)
+				}
+			}
+			return
 		}
 	}
 }

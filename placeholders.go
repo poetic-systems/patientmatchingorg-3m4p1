@@ -70,14 +70,14 @@ var names = []placeholder.PlaceholderCheck{
 }
 
 var dateofbirth = []placeholder.PlaceholderCheck{
-	// NOTE: using string checks here until the rules determine the need for
-	// handling various different date formats
-	&placeholder.StringCheck{Value: "01/01/1900"},
-	&placeholder.StringCheck{Value: "01/01/1901"},
-	&placeholder.StringCheck{Value: "01/01/1800"},
-	&placeholder.StringCheck{Value: "01/01/2000"},
-	&placeholder.StringCheck{Value: "11/11/1111"},
-	&placeholder.StringCheck{Value: "01/01/0001"},
+	// dateofbirth runs first and emits ISO 8601 (YYYY-MM-DD), so these are
+	// compared in that form; "01/01/1900" never reaches this check.
+	&placeholder.StringCheck{Value: "1900-01-01"},
+	&placeholder.StringCheck{Value: "1901-01-01"},
+	&placeholder.StringCheck{Value: "1800-01-01"},
+	&placeholder.StringCheck{Value: "2000-01-01"},
+	&placeholder.StringCheck{Value: "1111-11-11"},
+	&placeholder.StringCheck{Value: "0001-01-01"},
 	// a DOB equal to the record's registration/admission date (common default-fill error)
 }
 
