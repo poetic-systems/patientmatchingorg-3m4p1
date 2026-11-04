@@ -41,27 +41,17 @@ const (
 var normalizations = map[string][]string{
 	Given:        {"placeholder-names", "us-reduced_v0", "placeholder-names"},
 	Family:       {"placeholder-names", "us-reduced_v0", "placeholder-names"},
-	BirthDate:    {"placeholder-dateofbirth"},
+	BirthDate:    {"dateofbirth", "placeholder-dateofbirth"},
 	Line:         {"address", "placeholder-address"},
-	Phone:        {"placeholder-phonenumber"},
+	Phone:        {"phonenumbere164", "placeholder-phonenumber"},
 	Email:        {"whitespace", "lowercase", "placeholder-email"},
-	SSNLast4:     {"placeholder-last4"},
-	ITINLast4:    {"placeholder-last4"},
+	SSNLast4:     {"digits", "placeholder-last4"},
+	ITINLast4:    {"digits", "placeholder-last4"},
 	MBI:          {"us-reduced_v0"},
 	LegalID:      {"whitespace", "lowercase"},
 	MemberID:     {"whitespace", "lowercase", "placeholder-subscriberid"},
 	SubscriberID: {"whitespace", "lowercase", "placeholder-subscriberid"},
 	Identifier:   {"whitespace", "lowercase"},
-}
-
-// Pending lists the normalizations each demographic needs that go-opm-core
-// main does not provide yet (go-opm-core PR #5). They belong before the
-// placeholder list; until they land, these demographics match exactly as given.
-var Pending = map[string][]string{
-	BirthDate: {"dob_iso"},
-	Phone:     {"phone_e164"},
-	SSNLast4:  {"digits_only"},
-	ITINLast4: {"digits_only"},
 }
 
 // category1 is Table 2, Category 1 (Direct Match Rules), specification

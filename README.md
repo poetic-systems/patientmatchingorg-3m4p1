@@ -60,18 +60,12 @@ name placeholders contain whitespace and punctuation.
 - **Fuzzy matching (§V.E).** Fields marked `*` match exactly. Their
   `demographicalts` functions (Damerau-Levenshtein distance 1 for names of 5 or
   more characters, ±1 day for DOB) do not exist yet.
-- **Normalizations missing from go-opm-core main.** `dob_iso` (DOB),
-  `phone_e164` (phone) and `digits_only` (SSN and ITIN last 4) are in
-  go-opm-core PR #5. They are listed in `Pending`; `TestPending` fails once they
-  are registered, so they get wired in.
 - **Category 2** (Household + Individual rules).
 - **Identifier namespaces.** `legalId`, `memberId`, `subscriberId` and
   `identifier` are expected to carry their namespace in the value; how it is
   encoded belongs to the translation layer.
 - **Nicknames, all known names, and the generational suffix check** (§V.B).
   The suffix is a demographic compared only when both records have it.
-- **The DOB range check** (§V.D.6: before current year - 120 or after today + 2
-  days is unavailable).
 
 ## License
 

@@ -2,11 +2,14 @@ package patientmatchingorg3m4p1
 
 import (
 	"encoding/json"
+	"maps"
 	"os"
 	"slices"
 	"strings"
 	"testing"
 
+	goopmcore "github.com/PortobelloAuth/go-opm-core"
+	"github.com/PortobelloAuth/go-opm-core/pkg/match"
 	"github.com/PortobelloAuth/go-opm-core/pkg/normalization"
 )
 
@@ -107,21 +110,6 @@ func TestNew(t *testing.T) {
 	}
 }
 
-// TestPending fails once go-opm-core registers a pending normalization, so
-// that it is wired into fields and removed from Pending.
-func TestPending(t *testing.T) {
-	for k, names := range Pending {
-		if _, ok := normalizations[k]; !ok {
-			t.Errorf("pending normalizations for unknown demographic %s", k)
-		}
-		for _, n := range names {
-			if _, err := normalization.New(n); err == nil {
-				t.Errorf("%s: %s is now registered in go-opm-core; add it to normalizations and remove it from Pending", k, n)
-			}
-		}
-	}
-}
-
 func TestNormalizations(t *testing.T) {
 	rs, err := New()
 	if err != nil {
@@ -147,14 +135,17 @@ func TestNormalizations(t *testing.T) {
 		{Family, " Unknown ", ""},
 		{Family, "ZZZ", ""},
 		{BirthDate, "1980-02-29", "1980-02-29"},
-		{BirthDate, "01/01/1900", ""},
-		{Phone, "555-555-5555", ""},
-		{Phone, "(212) 555 0100", ""},
+		{BirthDate, "03/04/2007", "2007-03-04"},
+		{Phone, "(212) 736-5000", "+12127365000"},
+		{Phone, "1-212-736-5000", "+12127365000"},
+		{Phone, "202-555-0100", ""},
 		{Email, " Jane.Roe@Mail.org", "jane.roe@mail.org"},
 		{Email, "Test@Test.com", ""},
 		{Email, "no-reply@clinic.org", ""},
 		{SSNLast4, "1234", ""},
 		{SSNLast4, "4821", "4821"},
+		{SSNLast4, "-4821 ", "4821"},
+		{ITINLast4, "0000", ""},
 		{MBI, "1EG4-TE5-MK73", "1eg4te5mk73"},
 		{SubscriberID, "PENDING", ""},
 		{MemberID, "W123 456 789-01", "w123456789-01"},
@@ -167,6 +158,76 @@ func TestNormalizations(t *testing.T) {
 		}
 		if got != tc.want {
 			t.Errorf("%s %q: got %q, want %q", tc.key, tc.in, got, tc.want)
+		}
+	}
+}
+
+// TestUnavailable checks values that fail normalization: Match treats the
+// error as an unavailable field, so the rule cannot match on it.
+func TestUnavailable(t *testing.T) {
+	rs, err := New()
+	if err != nil {
+		t.Fatal(err)
+	}
+	seqs := make(map[string]*normalization.NormalizationSequence)
+	for _, r := range rs.Rules {
+		for _, c := range r.Components {
+			seqs[c.Key] = c.Normalizations
+		}
+	}
+	for _, tc := range []struct{ key, in string }{
+		{BirthDate, "01/01/1900"},
+		{BirthDate, "not a date"},
+		{Phone, "555-555-5555"},
+		{Phone, "12"},
+	} {
+		if got, err := seqs[tc.key].Apply(tc.in); err == nil {
+			t.Errorf("%s %q: got %q, want an error", tc.key, tc.in, got)
+		}
+	}
+}
+
+func TestPlaintextMatch(t *testing.T) {
+	rs, err := New()
+	if err != nil {
+		t.Fatal(err)
+	}
+	a := map[string]string{
+		Given: "José", Family: "O'Brien", BirthDate: "1980-02-29",
+		Phone: "(212) 736-5000", Email: "Jane.Roe@Mail.org", SSNLast4: "4821",
+	}
+	with := func(kv ...string) map[string]string {
+		m := maps.Clone(a)
+		for i := 0; i < len(kv); i += 2 {
+			if kv[i+1] == "" {
+				delete(m, kv[i])
+			} else {
+				m[kv[i]] = kv[i+1]
+			}
+		}
+		return m
+	}
+	for _, tc := range []struct {
+		name string
+		b    map[string]string
+		want bool
+	}{
+		{"same record", a, true},
+		{"formatting differs", with(Given, "jose", Family, "OBrien", BirthDate, "02/29/1980", Phone, "1-212-736-5000", SSNLast4, "4821"), true},
+		{"only given+DOB (no rule)", map[string]string{Given: "José", BirthDate: "1980-02-29"}, false},
+		{"given+DOB+phone (rule 11)", map[string]string{Given: "jose", BirthDate: "1980-02-29", Phone: "212.736.5000"}, true},
+		{"given+family+DOB+SSN, different DOB", with(BirthDate, "1980-03-01", Phone, "", Email, ""), false},
+		{"placeholder phone never matches", map[string]string{Given: "José", BirthDate: "1980-02-29", Phone: "555-555-5555"}, false},
+		{"placeholder on both sides", map[string]string{Given: "Unknown", Phone: "202-555-0100"}, false},
+		{"different person", map[string]string{Given: "Ann", Family: "Lee", BirthDate: "1990-01-01", SSNLast4: "9999"}, false},
+	} {
+		got, err := goopmcore.PlaintextMatch(&match.Demographics{Raw: a}, &match.Demographics{Raw: tc.b}, rs)
+		if err != nil {
+			t.Errorf("%s: %v", tc.name, err)
+			continue
+		}
+		if got != tc.want {
+			t.Errorf("%s: matched %v, want %v", tc.name, got, tc.want)
 		}
 	}
 }
